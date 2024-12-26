@@ -25,11 +25,11 @@ export default function VideoSection() {
                                 className="group relative flex items-center justify-center w-20 h-20 rounded-full bg-red-600 hover:bg-red-700 transition-colors"
                                 aria-label="Play video"
                             >
-                                {/* YouTube-style play button */}
+                    
                                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-red-600 group-hover:bg-red-700 transition-transform group-hover:scale-110">
                                     <Play className="w-8 h-8 text-white fill-white ml-1" />
                                 </div>
-                                {/* Ripple effect */}
+                            
                                 <div className="absolute inset-0 rounded-full bg-red-600/30 animate-ping" />
                             </button>
                         </div>
