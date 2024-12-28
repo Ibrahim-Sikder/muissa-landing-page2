@@ -10,21 +10,22 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Container } from "@mui/material";
 import Link from "next/link";
 import TopBar from "./TopBar";
+import MuissaButton from "../LandingPage/Button";
 
 const Header = () => {
     return (
         <header>
             <TopBar />
-            <Container className="headerWrap mt-3 ">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-3 md:gap-5  space-y-4 md:space-y-0">
-                    {/* Logo Section */}
+            <Container className="headerWrap mt-5 ">
+                <div className="flex flex-col lg:flex-row flex-wrap items-center  justify-center xl:justify-between gap-3 md:gap-5  space-y-4 md:space-y-0">
+
                     <Link href="https://www.muissa.com/">
                         <div className="flex items-center justify-center">
                             <Image className="w-44 md:w-56" src={logo} alt="logo" />
                         </div>
                     </Link>
 
-                    {/* Contact Info Section */}
+
                     <div className="flex flex-col md:flex-row items-center justify-center xl:justify-end space-y-4 md:space-y-0 md:space-x-6">
                         {/* Phone Section */}
                         <div className="flex items-center">
@@ -55,6 +56,7 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
+                    <MuissaButton />
                 </div>
             </Container>
         </header>

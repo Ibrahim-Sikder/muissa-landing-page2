@@ -8,6 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import company from '../../../src/assets/invest/some-features.png';
+import CTAButton from './CTAButton';
 
 const fadeInVariant = {
   hidden: { opacity: 0, x: 50 },
@@ -87,6 +88,7 @@ export default function BusinessSection() {
               কার্যপদ্ধতি নির্ধারণে পরামর্শ প্রদানের মাধ্যমে আমরা ব্যবসায়িক
               সমাধানে নির্ভরযোগ্য সেবা প্রদান করি।
             </motion.p>
+            <CTAButton />
           </motion.div>
 
           {/* Image Section */}

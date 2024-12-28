@@ -1,4 +1,5 @@
 import Header from "../Header/Header";
+import ApplyButton from "./ApplyButton";
 import Benefits from "./Benefits";
 import FinalCTA from "./FinalCTA";
 import Footer from "./Footer";
@@ -13,10 +14,11 @@ import WhyChooseUs from "./WhyChooseUs";
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#00305C]  text-white">
+      <Header />
       <main className="container mx-auto px-4 pt-3 md:pt-0 ">
-        <Header />
         <LandingHero />
         <VideoSection />
+        <ApplyButton />
         <Benefits />
         <ServiceCategories />
         <InvestmentSection />

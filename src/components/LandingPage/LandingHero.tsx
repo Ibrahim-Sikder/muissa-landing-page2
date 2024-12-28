@@ -37,7 +37,7 @@ export default function TaxTalksLanding() {
         </motion.h3>
 
         <motion.h1
-          className="text-4xl lg:text-6xl font-bold leading-tight mt-3"
+          className="text-4xl text-center  xl:text-left lg:text-6xl font-bold leading-tight mt-3"
           initial="initial"
           animate="animate"
           variants={textAnimation}

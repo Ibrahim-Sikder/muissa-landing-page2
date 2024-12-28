@@ -22,7 +22,7 @@ export default function InvestmentSection() {
             </div>
           </motion.div>
 
-          {/* Text Section with Zoom Animation */}
+
           <motion.div
             className="space-y-4 text-center flex-1"
             initial={{ scale: 0.8, opacity: 0 }}
@@ -36,6 +36,7 @@ export default function InvestmentSection() {
               নির্ধারণে পরামর্শ প্রদানের মাধ্যমে আমরা ব্যবসায়িক সমাধানে নির্ভরযোগ্য সেবা প্রদান করি।
             </p>
           </motion.div>
+            
         </div>
       </div>
     </div>
