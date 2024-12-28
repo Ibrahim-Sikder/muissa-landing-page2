@@ -7,7 +7,10 @@ import "swiper/css/navigation";
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
+import logo from '../../../src/assets/logo/facebook-profile.png'
+import Image from "next/image";
 
+import MuissaButton from "./Button";
 import { motion } from 'framer-motion';  
 
 export default function TaxTalksLanding() {
@@ -22,13 +25,24 @@ export default function TaxTalksLanding() {
   };
 
   return (
-    <div className="text-white h-auto lg:h-[40vh] mt-[50px] md:mt-[30px] lg:sectionMargin ">
-      
+    <div className="text-white relative overflow-hidden">
+      <div className="flex gap-x-5 items-center justify-between px-0 md:px-10 lg:px-40">
+        <div className="w-24 sm:w-32 md:w-44 lg:w-56">
+          <Image src={logo} alt="logo" />
+        </div>
+        <div className="divider"></div>
+        <MuissaButton />
+      </div>
 
       <div className="flex flex-col justify-center items-center">
-       
+        <div className="relative text-center">
+          <div className="absolute -left-14 md:-left-4 -top-2 bg-[#1591A3] text-white py-2 px-4 transform -rotate-12">
+            <p className="text-sm font-medium">MUISSA</p>
+          </div>
+        </div>
+
         <motion.h3 
-          className="text-xl lg:text-3xl font-bold leading-tight"
+          className="text-xl lg:text-3xl font-bold leading-tight mt-16"
           initial="initial"
           animate="animate"
           variants={textAnimation}

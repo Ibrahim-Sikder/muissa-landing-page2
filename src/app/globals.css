@@ -33,7 +33,7 @@ body {
 }
 
 .sectionMargin {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 
@@ -44,7 +44,7 @@ body {
 }
 @media only screen and (max-width: 768px) {
   .sectionMargin {
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }
 @media only screen and (max-width: 500px) {

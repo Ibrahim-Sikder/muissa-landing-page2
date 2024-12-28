@@ -26,7 +26,7 @@ export default function ComparionSection() {
           </motion.h3>
         </div>
 
-        {/* Image Boxes Section with Left and Right Animations */}
+
         <div className="flex flex-col sm:flex-row items-center justify-center gap-y-5 md:gap-10">
           {/* Image Box 1 */}
           <motion.div
@@ -36,22 +36,26 @@ export default function ComparionSection() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           >
-            <div className="group relative h-[250px] lg:h-[400px] w-[250px] lg:w-[400px] md:w-[300px] md:h-[300px]">
+            <div className="border rounded-md border-white hover:border-4 hover:border-white group relative  h-auto sm:h-[250px] md:h-[300px] lg:h-[400px] w-[200px] sm:w-[250px] md:w-[300px] lg:w-[400px]">
               <div className="absolute inset-0 bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
-              <div className="border-4 border-white/10 rounded-lg p-4 transition-all duration-300 hover:border-blue-400">
-                <div className="aspect-square relative bg-[#001a38] rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-white/70 text-lg">Image Box 1</p>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-white/80 text-sm">-Before</span>
+              <div className="rounded-lg p-4 transition-all duration-300 hover:border-white">
+                <h2 className="text-lg sm:text-xl md:text-2xl mb-2">-Before</h2>
+                <div className="w-full h-auto  sm:h-[200px] md:h-[200px] lg:h-[300px] aspect-square relative bg-[#001a38] rounded-lg overflow-hidden">
+                  <div className="w-full h-full absolute inset-0 flex items-center justify-center">
+                    <p className="text-white/70 text-sm sm:text-lg">Image Box 1</p>
                   </div>
                 </div>
+              </div>
+              <div className="absolute bottom-4 left-4">
+                <p className="text-xs sm:text-sm md:text-base">
+                  নিজের আর্থিক অবস্থার মূল্যায়ন করুন। সম্ভাব্য ঝুঁকিগুলি বুঝুন। বিনিয়োগের
+                  লক্ষ্য এবং সময়সীমা নির্ধারণ করুন। বাজার ও বিনিয়োগের ধরণ সম্পর্কে জ্ঞান
+                  অর্জন করুন।
+                </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Image Box 2 */}
           <motion.div
             className="space-y-4"
             initial={{ x: 100, opacity: 0 }}
@@ -59,20 +63,26 @@ export default function ComparionSection() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           >
-            <div className="group relative h-[250px] lg:h-[400px] w-[250px] lg:w-[400px] md:w-[300px] md:h-[300px]">
+            <div className="border rounded-md border-white hover:border-4 hover:border-white group relative h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] w-[200px] sm:w-[250px] md:w-[300px] lg:w-[400px]">
               <div className="absolute inset-0 bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
-              <div className="border-4 border-white/10 rounded-lg p-4 transition-all duration-300 hover:border-blue-400">
-                <div className="aspect-square relative bg-[#001a38] rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-white/70 text-lg">Image Box 2</p>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-white/80 text-sm">-After</span>
+              <div className="rounded-lg p-4 transition-all duration-300 hover:border-white">
+                <h2 className="text-lg sm:text-xl md:text-2xl mb-2">-After</h2>
+                <div className="w-full h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] aspect-square relative bg-[#001a38] rounded-lg overflow-hidden">
+                  <div className="w-full h-full absolute inset-0 flex items-center justify-center">
+                    <p className="text-white/70 text-sm sm:text-lg">Image Box 1</p>
                   </div>
                 </div>
               </div>
+              <div className="absolute bottom-4 left-4">
+                <p className="text-xs sm:text-sm md:text-base">
+                  বিনিয়োগের অগ্রগতি নিয়মিত পর্যবেক্ষণ করুন। বিনিয়োগ পরিকল্পনা অনুযায়ী
+                  সিদ্ধান্ত নিন। ঝুঁকি কমানোর জন্য বিনিয়োগ বৈচিত্র্য করুন। আর্থিক লক্ষ্য
+                  অনুযায়ী ফলাফল মূল্যায়ন করুন।
+                </p>
+              </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </div>
