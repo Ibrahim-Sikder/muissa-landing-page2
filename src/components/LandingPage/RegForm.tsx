@@ -1,35 +1,75 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import {
   Box,
   Button,
   Typography,
 } from '@mui/material'
-import { Person, Phone,  Apartment, WhatsApp, Work, Interests } from '@mui/icons-material'
+import { Person, Apartment, WhatsApp, Work, Interests } from '@mui/icons-material'
 import { FieldValues } from 'react-hook-form'
 import MuissaForm from '../Forms/form'
 import MUIInput from '../Forms/input'
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { investmentItems } from '@/utils'
+import { toast } from 'sonner'
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { z } from 'zod';
+
+const mettingSchema = z.object({
+  fullName: z.string({ required_error: 'Full name is required.' }),
+  whatsappNumber: z.union([
+    z.string({ required_error: 'Whatsapp number is required' }),
+    z.number({ required_error: 'Whatsapp number is required' }),
+  ]),
+  profession: z.string({ required_error: 'Profession is required' }),
+  investmentExperience: z.string({
+    required_error: 'Investment experience is required',
+  }),
+  mettingTopic: z.string({ required_error: 'Metting topic is required' }),
+});
 
 const MUISelect = dynamic(() => import('../Forms/select'), { ssr: false })
+type propsType = {
+  onClose: any
+}
+export default function QuoteRequestForm({ onClose }: propsType) {
 
-export default function QuoteRequestForm() {
-  const [isMounted, setIsMounted] = useState(false)
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  const handleBookMetting = async (data: FieldValues) => {
+    try {
+      console.log(data)
+      const formattedData = {
+        ...data,
+        whatsappNumber: Number(data.whatsappNumber),
+        phoneNumber: Number(data.phoneNumber),
+      };
+      console.log(formattedData)
 
-  if (!isMounted) {
-    return null
-  }
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/metting`,
+        formattedData
+      );
+      console.log(res);
 
-  const handleSubmit = (data: FieldValues) => {
-    console.log(data)
-  }
+      if (res.status === 200 || res.status === 201) {
+        toast.success('Meeting booked successfully!', {
+          id: 'success-toast',
+          duration: 1000,
+        });
+        onClose()
+
+      }
+    } catch (err) {
+      toast.error("Something went wrong!!!");
+      console.error(err);
+    }
+  };
+
 
   return (
-    <MuissaForm onSubmit={handleSubmit}>
+    <MuissaForm onSubmit={handleBookMetting} resolver={zodResolver(mettingSchema)}>
       <Box
         sx={{
           bgcolor: 'white',
@@ -56,13 +96,13 @@ export default function QuoteRequestForm() {
             textTransform: 'uppercase',
           }}
         >
-          Book Metting 
+          Book Metting
         </Typography>
 
         <Box>
           <MUIInput
             fullWidth
-            name='name'
+            name='fullName'
             placeholder="নাম"
             size='medium'
             InputProps={{
@@ -72,22 +112,9 @@ export default function QuoteRequestForm() {
             }}
           />
 
+        
           <MUIInput
-            name='phoneNumber'
-            fullWidth
-            size='medium'
-            label='ফোন নম্বর'
-            placeholder="ফোন নম্বর"
-            sx={{ mb: 2 }}
-            InputProps={{
-              startAdornment: (
-                <Phone sx={{ color: 'text.secondary', mr: 1 }} />
-              ),
-            }}
-          />
-
-          <MUIInput
-            name='whatsupNumber'
+            name='whatsappNumber'
             fullWidth
             placeholder="হোয়াটসঅ্যাপ নাম্বার"
             variant="outlined"
@@ -131,11 +158,11 @@ export default function QuoteRequestForm() {
 
           <MUISelect
             size="medium"
-            items={["নিয়মিত বিনিয়োগ", " হালাল বিনিয়োগ", " ঝুঁকিমুক্ত বিনিয়োগ"]}
+            items={investmentItems}
             fullWidth
             label="কোন ধরনের বিনিয়োগে আগ্রহী"
             placeholder="Select investment type"
-            name="investment"
+            name="mettingTopic"
             adornment={<Interests sx={{ color: 'text.secondary' }} />}
           />
 

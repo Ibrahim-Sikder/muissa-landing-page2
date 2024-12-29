@@ -11,31 +11,70 @@ import {
     Paper,
     Container,
 } from "@mui/material";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
 import { Dayjs } from 'dayjs';
+import MuissaForm from "@/components/Forms/form";
+import MUIDateCalendar from "@/components/Forms/datecalendar";
+import MUITimePicker from "@/components/Forms/timepicker";
+import MUIInput from "@/components/Forms/input";
+import { Interests, Person, Phone, WhatsApp, Work } from "@mui/icons-material";
+import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
+import axios from "axios";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { investmentItems } from "@/utils";
+import MUISelect from "@/components/Forms/select";
+import { useRouter } from "next/navigation";
+
+const mettingSchema = z.object({
+    fullName: z.string({ required_error: 'Full name is required' }),
+    whatsappNumber: z.union([
+        z.string({ required_error: 'Whatsapp number is required' }),
+        z.number({ required_error: 'Whatsapp number is required' }),
+    ]),
+    profession: z.string({ required_error: 'Profession is required' }),
+
+    mettingTopic: z.string({ required_error: 'Meeting topic is required' }),
+    mettingTime: z.string({ required_error: 'Metting time is reqiured' }),
+    mettingDate: z.string({ required_error: 'Metting date is required' }),
+});
 
 const MeetingBooking = () => {
     const isLargeDevice = useMediaQuery("(min-width:960px)");
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
     const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
+    const router = useRouter()
 
-    const handleBooking = () => {
-        if (!selectedDate || !selectedTime) {
-            alert('Please select date and time');
-            return;
+    const handleBookMetting = async (data: FieldValues) => {
+
+        try {
+            const res = await axios.post(
+                `${process.env.NEXT_PUBLIC_BASE_API_URL}/metting/consultancy-book`,
+                data
+            );
+            router.push('')
+
+            if (res.status === 200 || res.status === 201) {
+                toast.success('Meeting booked successfully!', {
+                    id: 'success-toast',
+                    duration: 1000,
+                });
+
+
+            }
+        } catch (err) {
+            toast.error("Something went wrong!!!");
+            console.error(err);
         }
-        console.log('Booking:', {
-            selectedDate: selectedDate.format('YYYY-MM-DD'),
-            selectedTime: selectedTime.format('HH:mm'),
-        });
-        alert('Meeting booked successfully!');
     };
 
+
+
+
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <MuissaForm onSubmit={handleBookMetting} resolver={zodResolver(mettingSchema)}>
+
             <Box
                 sx={{
                     minHeight: '100vh',
@@ -61,16 +100,16 @@ const MeetingBooking = () => {
                 />
 
                 <Container maxWidth="lg">
-                    <Stack spacing={4} alignItems="center">
+                    <Stack spacing={1} alignItems="center">
 
-                        <Box sx={{ textAlign: 'center', mb: 4 }}>
+                        <Box sx={{ textAlign: 'center' }}>
                             <Typography
                                 variant="h2"
                                 sx={{
                                     color: 'white',
                                     fontWeight: 'bold',
                                     mb: { xs: 1, sm: 2, md: 3 },
-                                    fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
+                                    fontSize: { xs: '1.5rem', sm: '3rem', md: '4rem' },
                                     '& span': {
                                         color: '#34B8B1',
                                     },
@@ -99,6 +138,8 @@ const MeetingBooking = () => {
                                 overflow: 'hidden',
                                 backgroundColor: 'white',
                                 display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
                                 flexDirection: { xs: 'column', md: 'row' },
                                 maxWidth: 900,
                                 width: '100%',
@@ -111,48 +152,78 @@ const MeetingBooking = () => {
                                     p: 2,
                                 }}
                             >
-                                <DateCalendar
-                                    value={selectedDate}
-                                    onChange={(newValue) => setSelectedDate(newValue)}
-                                    sx={{
-                                        '& .MuiPickersDay-root.Mui-selected': {
-                                            backgroundColor: '#1591A3',
-                                            '&:hover': {
-                                                backgroundColor: '#1591A3',
-                                            },
-                                        },
-                                    }}
-                                />
+
+
+                                <MUIDateCalendar name="mettingDate" />
                             </Box>
                             <Box
                                 sx={{
                                     flex: 1,
-                                    p: 4,
+                                    p: 3,
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: 3,
+                                    gap: 1,
                                 }}
                             >
-                                <Typography variant="h5" sx={{ color: '#333', mb: 2 }}>
-                                    Select Time
-                                </Typography>
-
-                                <TimePicker
-                                    label="Meeting Time"
-                                    value={selectedTime}
-                                    onChange={(newValue) => setSelectedTime(newValue)}
-                                    sx={{
-                                        '& .MuiOutlinedInput-root': {
-                                            '& fieldset': { borderColor: '#1591A3' },
-                                            '&:hover fieldset': { borderColor: '#1591A3' },
-                                            '&.Mui-focused fieldset': { borderColor: '#1591A3' },
-                                        },
+                                <MUIInput
+                                    fullWidth
+                                    name='fullName'
+                                    placeholder="নাম"
+                                    size='medium'
+                                    InputProps={{
+                                        startAdornment: (
+                                            <Person sx={{ color: 'text.secondary', mr: 1 }} />
+                                        ),
                                     }}
                                 />
 
+
+                                <MUIInput
+                                    name='whatsappNumber'
+                                    fullWidth
+                                    placeholder="হোয়াটসঅ্যাপ নাম্বার"
+                                    variant="outlined"
+                                    size='medium'
+                                    sx={{ mb: 2 }}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <WhatsApp sx={{ color: 'text.secondary', mr: 1 }} />
+                                        ),
+                                    }}
+                                />
+                                <MUIInput
+                                    name='profession'
+                                    fullWidth
+                                    label='পেশা'
+                                    placeholder="পেশা"
+                                    variant="outlined"
+                                    size='medium'
+                                    sx={{ mb: 2 }}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <Work sx={{ color: 'text.secondary', mr: 1 }} />
+                                        ),
+                                    }}
+                                />
+
+                                <MUISelect
+                                    size="medium"
+                                    items={investmentItems}
+                                    fullWidth
+                                    label="কোন ধরনের বিনিয়োগে আগ্রহী"
+                                    placeholder="Select investment type"
+                                    name="mettingTopic"
+                                    adornment={<Interests sx={{ color: 'text.secondary' }} />}
+                                />
+                                <MUITimePicker
+                                    value={selectedTime}
+                                    onChange={(newValue) => setSelectedTime(newValue)}
+                                    label="Select Time"
+                                    name="mettingTime"
+                                />
                                 <Button
                                     variant="contained"
-                                    onClick={handleBooking}
+                                    type="submit"
                                     sx={{
                                         mt: 'auto',
                                         backgroundColor: '#1591A3',
@@ -173,7 +244,8 @@ const MeetingBooking = () => {
                     </Stack>
                 </Container>
             </Box>
-        </LocalizationProvider>
+
+        </MuissaForm>
     );
 };
 

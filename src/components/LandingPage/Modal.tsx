@@ -19,7 +19,7 @@ const MuissaModal: React.FC<ModalProps> = ({ onClose }) => {
         >
           <Close />
         </button>
-        <QuoteRequestForm />
+        <QuoteRequestForm onClose={onClose}/>
       </div>
     </div>
   );
