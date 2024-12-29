@@ -1,6 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 
-/* eslint-disable react/no-unescaped-entities */
 
 import React from 'react';
 import {
@@ -17,16 +17,9 @@ import { CheckCircle, Event, } from '@mui/icons-material';
 import Link from 'next/link';
 import { Clock } from 'lucide-react';
 
-interface ThankYouPageProps {
-    bookingDetails: {
-        fullName: string;
-        date: string;
-        time: string;
-        whatsappNumber: string;
-    };
-}
 
-const ThankYouPage: React.FC<ThankYouPageProps> = ({ bookingDetails }) => {
+
+const ThankYouPage = () => {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -79,7 +72,9 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ bookingDetails }) => {
                             wordBreak: 'break-word', // Ensures long text wraps properly
                         }}
                     >
-                        Thank You (Client Name) {bookingDetails?.fullName}!
+                        Thank You (Client Name)!
+                        {/* {bookingDetails?.fullName} */}
+                        
                     </Typography>
 
 

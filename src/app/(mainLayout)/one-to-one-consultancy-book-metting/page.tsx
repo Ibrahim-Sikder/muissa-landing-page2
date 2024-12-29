@@ -53,7 +53,7 @@ const MeetingBooking = () => {
                 `${process.env.NEXT_PUBLIC_BASE_API_URL}/metting/consultancy-book`,
                 data
             );
-            router.push('')
+
 
             if (res.status === 200 || res.status === 201) {
                 toast.success('Meeting booked successfully!', {
@@ -63,6 +63,7 @@ const MeetingBooking = () => {
 
 
             }
+            router.push('/thank-you-consultant')
         } catch (err) {
             toast.error("Something went wrong!!!");
             console.error(err);
